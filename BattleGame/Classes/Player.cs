@@ -8,6 +8,8 @@ namespace BattleGame.Classes
 {
     class Player
     {
+        private SuppliesStorage OffMapStorage;
+
         public Player()
         {
 

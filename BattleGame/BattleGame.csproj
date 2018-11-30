@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Constructions\BaseConstruct.cs" />
     <Compile Include="Classes\UnitComposition.cs" />
     <Compile Include="UI\MapFrame.cs" />
     <Compile Include="UI\OutputFrame.cs" />
@@ -110,6 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Equipment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\TestMap.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\MapDataInstructions.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

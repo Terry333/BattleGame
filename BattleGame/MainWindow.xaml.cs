@@ -26,7 +26,15 @@ namespace BattleGame
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            string locationString = AppDomain.CurrentDomain.BaseDirectory + "GameData\\TestMap.txt";
+            string mapInputData = System.IO.File.ReadAllText(@locationString);
+
+            string[] mapSections = mapInputData.Split('-');
+
+            string[] mapDimensions = mapSections[0].Split(';');
+
+
             Grid grid = new Grid();
             grid.RowDefinitions.Add(new RowDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -51,7 +59,7 @@ namespace BattleGame
 
             rightGrid.Children.Add(output);
 
-            MapFrame map = new MapFrame(70, 70);
+            MapFrame map = new MapFrame(Convert.ToInt32(mapDimensions[0]), Convert.ToInt32(mapDimensions[1]));
             
             Grid.SetRow(map, 0);
             Grid.SetColumn(map, 0);
@@ -62,9 +70,9 @@ namespace BattleGame
 
             this.Content = grid;
 
-            for (int x = 0; x < 70; x++)
+            for (int x = 0; x < Convert.ToInt32(mapDimensions[0]); x++)
             {
-                for (int y = 0; y < 70; y++)
+                for (int y = 0; y < Convert.ToInt32(mapDimensions[1]); y++)
                 {
                     map.getMapSpaceFromMapGrid(x, y).Click += MapSpaceClick;
                 }
