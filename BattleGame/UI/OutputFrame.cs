@@ -33,7 +33,7 @@ namespace BattleGame.UI
         public void postMessage(String message)
         {
             TextBlock block = new TextBlock();
-            block.Width = 100;
+            block.Width = stackPanel.Width;
             block.Height = 25;
             block.Text = message;
             stackPanel.Children.Add(block);

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 using BattleGame.UI;
 using BattleGame.Classes;
 
@@ -27,7 +28,9 @@ namespace BattleGame
         {
             InitializeComponent();
 
-            string locationString = AppDomain.CurrentDomain.BaseDirectory + "GameData\\TestMap.txt";
+            string locationString = System.IO.Path.GetFullPath(System.IO.Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, @"..\\..\\")) + "GameData\\TestMap.txt";
+
+
             string mapInputData = System.IO.File.ReadAllText(@locationString);
 
             string[] mapSections = mapInputData.Split('-');
@@ -60,7 +63,8 @@ namespace BattleGame
             rightGrid.Children.Add(output);
 
             MapFrame map = new MapFrame(Convert.ToInt32(mapDimensions[0]), Convert.ToInt32(mapDimensions[1]));
-            
+            //MapFrame map = new MapFrame(10,10);
+
             Grid.SetRow(map, 0);
             Grid.SetColumn(map, 0);
             
@@ -78,6 +82,10 @@ namespace BattleGame
                 }
             }
 
+            output.postMessage("Application started.");
+            output.postMessage(locationString);
+            output.postMessage(mapDimensions[0]);
+            output.postMessage(mapDimensions[1]);
         }
 
         public void MapSpaceClick(object sender, RoutedEventArgs e)

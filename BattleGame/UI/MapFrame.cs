@@ -44,8 +44,8 @@ namespace BattleGame.UI
                     Grid.SetRow(mapSpaceGrid[x,y], y);
                     Grid.SetColumn(mapSpaceGrid[x, y], x);
 
-                    mapSpaceGrid[x, y].Width = 10;
-                    mapSpaceGrid[x, y].Height = 10;
+                    mapSpaceGrid[x, y].Width = this.Width / X;
+                    mapSpaceGrid[x, y].Height = this.Height / Y;
 
                     this.Children.Add(mapSpaceGrid[x, y]);
                 }
