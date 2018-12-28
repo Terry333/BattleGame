@@ -31,13 +31,6 @@ namespace BattleGame
             string locationString = System.IO.Path.GetFullPath(System.IO.Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, @"..\\..\\")) + "GameData\\TestMap.txt";
 
 
-            string mapInputData = System.IO.File.ReadAllText(@locationString);
-
-            string[] mapSections = mapInputData.Split('-');
-
-            string[] mapDimensions = mapSections[0].Split(';');
-
-
             Grid grid = new Grid();
             grid.RowDefinitions.Add(new RowDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -62,7 +55,7 @@ namespace BattleGame
 
             rightGrid.Children.Add(output);
 
-            MapFrame map = new MapFrame(Convert.ToInt32(mapDimensions[0]), Convert.ToInt32(mapDimensions[1]));
+            MapFrame map = new MapFrame(locationString, output);
             //MapFrame map = new MapFrame(10,10);
 
             Grid.SetRow(map, 0);
@@ -71,28 +64,13 @@ namespace BattleGame
 
             grid.Children.Add(map);
 
-
             this.Content = grid;
-
-            for (int x = 0; x < Convert.ToInt32(mapDimensions[0]); x++)
-            {
-                for (int y = 0; y < Convert.ToInt32(mapDimensions[1]); y++)
-                {
-                    map.getMapSpaceFromMapGrid(x, y).Click += MapSpaceClick;
-                }
-            }
 
             output.postMessage("Application started.");
             output.postMessage(locationString);
-            output.postMessage(mapDimensions[0]);
-            output.postMessage(mapDimensions[1]);
-        }
-
-        public void MapSpaceClick(object sender, RoutedEventArgs e)
-        {
-            MapSpace actualSender = (MapSpace)sender;
-            output.postMessage(actualSender.getX().ToString() + ", " + actualSender.getY().ToString());
             
         }
+
+        
     }
 }

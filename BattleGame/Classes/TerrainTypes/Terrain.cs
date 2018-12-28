@@ -49,5 +49,10 @@ namespace BattleGame.Classes.TerrainTypes
         {
             return defenseModifier;
         }
+
+        public string getTerrainName()
+        {
+            return this.GetType().Name;
+        }
     }
 }

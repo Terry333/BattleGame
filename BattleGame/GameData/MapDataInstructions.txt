@@ -1,1 +1,14 @@
-﻿
+﻿x-dimension;y-dimension;
+
+- // separates sections
+
+terrain map(x,y)
+
+-
+
+town level map(x,y)
+
+-
+
+road map(x,y)
+

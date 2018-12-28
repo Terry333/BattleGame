@@ -32,12 +32,12 @@ namespace BattleGame.Classes
 
         public int getX()
         {
-            return X;
+            return Y;
         }
 
         public int getY()
         {
-            return Y;
+            return X;
         }
 
         public TerrainTypes.Terrain getTerrainType()
