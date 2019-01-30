@@ -68,7 +68,9 @@ namespace BattleGame
 
             output.postMessage("Application started.");
             output.postMessage(locationString);
-            
+            output.postMessage(map.ActualWidth.ToString());
+            output.postMessage(map.ActualHeight.ToString());
+
         }
 
         

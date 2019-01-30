@@ -13,10 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using BattleGame.UI;
 
 namespace BattleGame.Classes
 {
-    class MapSpace : Button
+    class MapSpace : HexButton
     {
         private TerrainTypes.Terrain terrainType;
         private SuppliesStorage storage;
@@ -68,6 +69,12 @@ namespace BattleGame.Classes
         public List<Equipment> getStorageList()
         {
             return storage.getStorageList();
+        }
+
+        public Button GetButton()
+        {
+            this.RemoveLogicalChild(this.Button);
+            return (Button) this.Button;
         }
     }
 }

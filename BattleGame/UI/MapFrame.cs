@@ -19,13 +19,19 @@ using BattleGame.Classes.TerrainTypes;
 
 namespace BattleGame.UI
 {
-    class MapFrame : Grid
+    class MapFrame : Canvas
     {
+        int xLength;
+        int yLength;
         MapSpace[,] mapSpaceGrid;
         OutputFrame output;
+        Button[,] buttonGrid;
 
         public MapFrame(string locationFile, OutputFrame output)
         {
+            this.Height = 1000;
+            this.Width = 900;
+
             this.output = output;
             string mapInputData = System.IO.File.ReadAllText(@locationFile);
 
@@ -35,6 +41,9 @@ namespace BattleGame.UI
 
             int X = int.Parse(mapDimensions[0]);
             int Y = int.Parse(mapDimensions[1]);
+
+            xLength = X;
+            yLength = Y;
 
             Terrain[,] terrainMap = new Terrain[X, Y];
 
@@ -67,34 +76,43 @@ namespace BattleGame.UI
             }
 
             mapSpaceGrid = new MapSpace[X,Y];
+            buttonGrid = new Button[X, Y];
 
-            for(int i = 0; i < Y; i++)
-            {
-                this.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-
-            for (int i = 0; i < X; i++)
-            {
-                this.RowDefinitions.Add(new RowDefinition());
-            }
+            Boolean isOdd = true;
+            double height = this.Height / yLength;
+            double width = this.Width / xLength;
+            double xMod = 0;
+            double yMod = 0;
+            Debug.WriteLine("Height " + this.Height.ToString() + ", Width" + this.Width.ToString());
 
             for (int y = 0; y < Y; y++)
             {
+                isOdd = !isOdd;
+
+                yMod = y * (0.75 * height);
+
                 for (int x = 0; x < X; x++)
                 {
-                    
+                    xMod = width * x;
+                    if(isOdd)
+                    {
+                        xMod = xMod + width / 2;
+                    }
+
                     mapSpaceGrid[x, y] = new MapSpace(x,y, terrainMap[x,y]);
+                    buttonGrid[x, y] = mapSpaceGrid[x, y].GetButton();
+
                     
+                    mapSpaceGrid[x, y].GetButton().Width = width;
+                    mapSpaceGrid[x, y].GetButton().Height = height;
 
-                    Grid.SetRow(mapSpaceGrid[x,y], x);
-                    Grid.SetColumn(mapSpaceGrid[x, y], y);
+                    Debug.WriteLine(xMod.ToString() + ", " + yMod.ToString());
 
-                    mapSpaceGrid[x, y].Width = this.Width / X;
-                    mapSpaceGrid[x, y].Height = this.Height / Y;
+                    this.Children.Add(mapSpaceGrid[x, y].GetButton());
 
-                    this.Children.Add(mapSpaceGrid[x, y]);
-
-                    mapSpaceGrid[x, y].Click += MapSpaceClick;
+                    Canvas.SetBottom(buttonGrid[x, y], yMod);
+                    Canvas.SetLeft(buttonGrid[x, y], xMod);
+                    mapSpaceGrid[x, y].GetButton().Click += MapSpaceClick;
                 }
             }
         }
@@ -104,11 +122,26 @@ namespace BattleGame.UI
             return mapSpaceGrid[y, x];
         }
 
+        private MapSpace GetAssociatedMapSpaceFromButton(Button button)
+        {
+            for(int i = 0; i < xLength; i++)
+            {
+                for (int o = 0; o < yLength; o++)
+                {
+                    if(button == buttonGrid[i,o])
+                    {
+                        return mapSpaceGrid[i, o];
+                    }
+                }
+            }
+            return null;
+        }
+
         public void MapSpaceClick(object sender, RoutedEventArgs e)
         {
-            MapSpace actualSender = (MapSpace)sender;
-            output.postMessage(actualSender.getX().ToString() + ", " + actualSender.getY().ToString());
-            output.postMessage(actualSender.getTerrainType().getTerrainName());
+            MapSpace space = GetAssociatedMapSpaceFromButton((Button) sender);
+            output.postMessage(space.getX().ToString() + ", " + space.getY().ToString());
+            output.postMessage(space.getTerrainType().getTerrainName());
         }
     }
 }
