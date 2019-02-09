@@ -10,7 +10,7 @@
       
 
     
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Height="120" Width="110" x:Name="Button" Content="1" BorderBrush="sc#1, 0, 0, 0" Foreground="Black" FontSize="72">
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Height="120" Width="110" x:Name="Button" Content="1" BorderBrush="sc#1, 0, 0, 0" BorderThickness ="10" Foreground="Black" FontSize="72">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid Width="Auto" Height="Auto" x:Name="Grid">

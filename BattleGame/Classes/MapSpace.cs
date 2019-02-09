@@ -22,6 +22,8 @@ namespace BattleGame.Classes
         private TerrainTypes.Terrain terrainType;
         private SuppliesStorage storage;
         private int X, Y;
+        private Player owner;
+        private int infrastructureLevel, functioningInfrastructure, townLevel;
 
         public MapSpace(int X, int Y, TerrainTypes.Terrain terrainType)
         {
@@ -75,6 +77,42 @@ namespace BattleGame.Classes
         {
             this.RemoveLogicalChild(this.Button);
             return (Button) this.Button;
+        }
+
+        public void ChangeOwner(Player newOwner)
+        {
+            owner = newOwner;
+        }
+
+        public Player GetOwner()
+        {
+            return owner;
+        }
+
+        public void SetInfrastructureLevel(int level)
+        {
+            infrastructureLevel = level;
+            functioningInfrastructure = level;
+        }
+
+        public void SetTownLevel(int level)
+        {
+            townLevel = level;
+        }
+
+        public int GetInfrasctructureLevel()
+        {
+            return infrastructureLevel;
+        }
+
+        public int GetFunctioningInfrastructure()
+        {
+            return functioningInfrastructure;
+        }
+
+        public int GetTownLevel()
+        {
+            return townLevel;
         }
     }
 }

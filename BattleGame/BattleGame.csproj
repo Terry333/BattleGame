@@ -58,6 +58,8 @@
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
     <Compile Include="Classes\TerrainTypes\Marsh.cs" />
     <Compile Include="Classes\UnitComposition.cs" />
+    <Compile Include="UI\MapMouseDetector.cs" />
+    <Compile Include="UI\MapControlFrame.cs" />
     <Compile Include="UI\HexButton.xaml.cs">
       <DependentUpon>HexButton.xaml</DependentUpon>
     </Compile>

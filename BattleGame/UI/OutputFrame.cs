@@ -37,6 +37,7 @@ namespace BattleGame.UI
             block.Height = 25;
             block.Text = message;
             stackPanel.Children.Add(block);
+            ScrollToBottom();
         }
 
     }

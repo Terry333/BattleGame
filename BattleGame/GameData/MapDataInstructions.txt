@@ -10,5 +10,10 @@ town level map(x,y)
 
 -
 
-road map(x,y)
+infrastructure map(x,y)
 
+-
+
+controller(x,y)
+
+-

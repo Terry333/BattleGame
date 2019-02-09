@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Diagnostics;
+using System.Threading;
 using BattleGame.UI;
 using BattleGame.Classes;
 
@@ -26,15 +28,22 @@ namespace BattleGame
         private OutputFrame output;
         public MainWindow()
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             InitializeComponent();
 
             string locationString = System.IO.Path.GetFullPath(System.IO.Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, @"..\\..\\")) + "GameData\\TestMap.txt";
-
 
             Grid grid = new Grid();
             grid.RowDefinitions.Add(new RowDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            Grid leftGrid = new Grid();
+            leftGrid.RowDefinitions.Add(new RowDefinition());
+            leftGrid.RowDefinitions.Add(new RowDefinition());
+            leftGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
             Grid rightGrid = new Grid();
             rightGrid.RowDefinitions.Add(new RowDefinition());
@@ -42,37 +51,50 @@ namespace BattleGame
             rightGrid.ColumnDefinitions.Add(new ColumnDefinition());
             rightGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
+            Grid.SetRow(leftGrid, 0);
+            Grid.SetColumn(leftGrid, 0);
+
             Grid.SetRow(rightGrid, 0);
             Grid.SetColumn(rightGrid, 1);
 
             grid.Children.Add(rightGrid);
+            grid.Children.Add(leftGrid);
 
             this.output = new OutputFrame();
 
             Grid.SetRow(output, 1);
             Grid.SetColumn(output, 1);
 
-
             rightGrid.Children.Add(output);
 
             MapFrame map = new MapFrame(locationString, output);
-            //MapFrame map = new MapFrame(10,10);
-
-            Grid.SetRow(map, 0);
+            Grid.SetRow(map, 1);
             Grid.SetColumn(map, 0);
             
+            leftGrid.Children.Add(map);
+            MapControlFrame mapControl = new MapControlFrame(map);
+            MapMouseDetector mapMouse = new MapMouseDetector(map, output);
 
-            grid.Children.Add(map);
+            Grid.SetRow(mapMouse, 1);
+            Grid.SetColumn(mapMouse, 0);
+
+            Grid.SetRow(mapControl, 0);
+            Grid.SetColumn(mapControl, 0);
+
+            leftGrid.Children.Add(mapControl);
+            //leftGrid.Children.Add(mapMouse);
 
             this.Content = grid;
+
+            stopWatch.Stop();
+
+            long ts = stopWatch.ElapsedMilliseconds;
 
             output.postMessage("Application started.");
             output.postMessage(locationString);
             output.postMessage(map.ActualWidth.ToString());
             output.postMessage(map.ActualHeight.ToString());
-
+            output.postMessage("Took " + ts.ToString() + " MS to start.");
         }
-
-        
     }
 }
