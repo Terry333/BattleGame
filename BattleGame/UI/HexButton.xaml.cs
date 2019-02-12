@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BattleGame.StaticClasses;
+using BattleGame.Classes;
 
 namespace BattleGame.UI
 {
@@ -20,9 +22,16 @@ namespace BattleGame.UI
     /// </summary>
     public partial class HexButton : Page
     {
+
         public HexButton()
         {
             InitializeComponent();
+        }
+
+        public Button GetButton()
+        {
+            this.RemoveLogicalChild(this.Button);
+            return (Button)this.Button;
         }
     }
 }

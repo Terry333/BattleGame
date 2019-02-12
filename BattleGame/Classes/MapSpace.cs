@@ -79,6 +79,11 @@ namespace BattleGame.Classes
             return (Button) this.Button;
         }
 
+        public Button GetButtonNoRemove()
+        {
+            return (Button)this.Button;
+        }
+
         public void ChangeOwner(Player newOwner)
         {
             owner = newOwner;

@@ -72,17 +72,6 @@ namespace BattleGame
             Grid.SetColumn(map, 0);
             
             leftGrid.Children.Add(map);
-            MapControlFrame mapControl = new MapControlFrame(map);
-            MapMouseDetector mapMouse = new MapMouseDetector(map, output);
-
-            Grid.SetRow(mapMouse, 1);
-            Grid.SetColumn(mapMouse, 0);
-
-            Grid.SetRow(mapControl, 0);
-            Grid.SetColumn(mapControl, 0);
-
-            leftGrid.Children.Add(mapControl);
-            //leftGrid.Children.Add(mapMouse);
 
             this.Content = grid;
 
@@ -95,6 +84,13 @@ namespace BattleGame
             output.postMessage(map.ActualWidth.ToString());
             output.postMessage(map.ActualHeight.ToString());
             output.postMessage("Took " + ts.ToString() + " MS to start.");
+
+            MapControlFrame mapControl = new MapControlFrame(map, output);
+
+            Grid.SetRow(mapControl, 0);
+            Grid.SetColumn(mapControl, 0);
+
+            leftGrid.Children.Add(mapControl);
         }
     }
 }

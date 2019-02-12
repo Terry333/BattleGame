@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,7 +59,8 @@
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
     <Compile Include="Classes\TerrainTypes\Marsh.cs" />
     <Compile Include="Classes\UnitComposition.cs" />
-    <Compile Include="UI\MapMouseDetector.cs" />
+    <Compile Include="StaticClasses\UIHelper.cs" />
+    <Compile Include="UI\ImageDrawing.cs" />
     <Compile Include="UI\MapControlFrame.cs" />
     <Compile Include="UI\HexButton.xaml.cs">
       <DependentUpon>HexButton.xaml</DependentUpon>
@@ -121,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Equipment\" />
+    <Folder Include="MapImageOverlay\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GameData\TestMap.txt" />

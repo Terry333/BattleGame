@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Media;
 using System.Diagnostics;
 using BattleGame.Classes;
 using BattleGame.Classes.TerrainTypes;
@@ -28,32 +29,16 @@ namespace BattleGame.UI
         private OutputFrame output;
         private Button[,] buttonGrid;
         private Canvas canvas;
-        private double widthToHeightRatio = 0.9;
-
-        private Boolean WDown = false;
-        private Boolean ADown = false;
-        private Boolean SDown = false;
-        private Boolean DDown = false;
 
         private System.Threading.Tasks.Task<int> time;
 
         public MapFrame(string locationFile, OutputFrame output)
         {
-            this.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-
-            canvas = new Canvas();
-
-            canvas.Height = 3000;
-            canvas.Width = 2700;
-
-            this.Content = canvas;
-
-            this.output = output;
             string mapInputData = System.IO.File.ReadAllText(@locationFile);
 
             string[] mapSections = mapInputData.Split('-');
 
-            string[] mapDimensions = mapSections[0].Split(';');                     
+            string[] mapDimensions = mapSections[0].Split(';');
 
             int X = int.Parse(mapDimensions[0]);
             int Y = int.Parse(mapDimensions[1]);
@@ -61,6 +46,16 @@ namespace BattleGame.UI
             xLength = X;
             yLength = Y;
 
+            this.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+
+            canvas = new Canvas();
+
+            canvas.Width = 2700;
+            canvas.Height = canvas.Width / X / 0.9 * Y;
+
+            this.Content = canvas;
+
+            this.output = output;
             mapSpaceGrid = new MapSpace[X,Y];
             buttonGrid = new Button[X, Y];
 
@@ -102,8 +97,8 @@ namespace BattleGame.UI
 
         public void UpdateZoom(double percent, Boolean create, string[] mapSections)
         {
-            canvas.Height = 3000 * percent;
-            canvas.Width = canvas.Height * widthToHeightRatio;
+            canvas.Width = 2700 * percent;
+            canvas.Height = canvas.Width / yLength / 0.9 * xLength;
 
             string[] townY = { };
             string[] infraY = { };
@@ -178,6 +173,7 @@ namespace BattleGame.UI
                     if(create)
                     {
                         mapSpaceGrid[x, y] = new MapSpace(x, y, terrainMap[x, y]);
+                        mapSpaceGrid[x, y].GetButton().Name = "Button" + x.ToString() + y.ToString();
                         buttonGrid[x, y] = mapSpaceGrid[x, y].GetButton();
                         canvas.Children.Add(buttonGrid[x, y]);
 
@@ -204,6 +200,16 @@ namespace BattleGame.UI
             return mapSpaceGrid[y, x];
         }
 
+        public Button[,] GetButtonGrid()
+        {
+            return buttonGrid;
+        }
+
+        public MapSpace[,] GetMapGrid()
+        {
+            return mapSpaceGrid;
+        }
+
         private MapSpace GetAssociatedMapSpaceFromButton(Button button)
         {
             for(int i = 0; i < xLength; i++)
@@ -219,11 +225,73 @@ namespace BattleGame.UI
             return null;
         }
 
+        public Button[,] GetButtons()
+        {
+            Button[,] returnArray = new Button[xLength, yLength];
+            Canvas canvas = (Canvas)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GetVisualChild(0), 1), 0);
+            for (int x = 0; x < xLength; x++)
+            {
+                for (int y = 0; y < yLength; y++)
+                {
+                    if(x != 0 && y != 0)
+                    {
+                        returnArray[x, y] = (Button)VisualTreeHelper.GetChild(canvas, x * y);
+                    }
+                    else
+                    {
+                        returnArray[x, y] = (Button)VisualTreeHelper.GetChild(canvas, y);
+                    }
+                    
+                }
+            }
+            return returnArray;
+        }
+
+        public TextBlock[,] GetMapTextBlocks()
+        {
+            TextBlock[,] returnArray = new TextBlock[xLength, yLength];
+            Canvas canvas = (Canvas)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GetVisualChild(0), 1), 0);
+            for (int x = 0; x < xLength; x++)
+            {
+                for (int y = 0; y < yLength; y++)
+                {
+                    if (x != 0 && y != 0)
+                    {
+                        Button button = (Button)VisualTreeHelper.GetChild(canvas, x * y);
+                        DependencyObject obj = VisualTreeHelper.GetChild(buttonGrid[y, x], 0);
+                        Grid grid = (Grid)obj;
+                        returnArray[x, y] = (TextBlock)VisualTreeHelper.GetChild(grid, 1);
+                    }
+                    else
+                    {
+                        Button button = (Button)VisualTreeHelper.GetChild(canvas, y);
+                        DependencyObject obj = VisualTreeHelper.GetChild(buttonGrid[y, x], 0);
+                        Grid grid = (Grid)obj;
+                        returnArray[x, y] = (TextBlock)VisualTreeHelper.GetChild(grid, 1);
+                    }
+
+                }
+            }
+            return returnArray;
+        }
+
+        public void ChangeAllSpaceText(string newText)
+        {
+            Canvas canvas = (Canvas) VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GetVisualChild(0), 1), 0);
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(canvas); i++)
+            {
+                Button button = (Button)VisualTreeHelper.GetChild(canvas, i);
+                Grid grid = (Grid)VisualTreeHelper.GetChild(button, 0);
+                TextBlock block = (TextBlock)VisualTreeHelper.GetChild(grid, 1);
+                block.Text = newText;
+            }
+        }
+
         public void MapSpaceClick(object sender, RoutedEventArgs e)
         {
             MapSpace space = GetAssociatedMapSpaceFromButton((Button) sender);
             output.postMessage(space.getX().ToString() + ", " + space.getY().ToString());
-            output.postMessage(space.getTerrainType().getTerrainName());
+            output.postMessage(space.GetFunctioningInfrastructure().ToString() + "/" + space.GetInfrasctructureLevel().ToString());
         }
     }
 }

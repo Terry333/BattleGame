@@ -16,10 +16,10 @@ using System.Diagnostics;
 
 namespace BattleGame.Classes
 {
-    class Unit
+    abstract class Unit
     {
         private SupplyNeededList supplyList;
-        private double softAttack, hardAttack, piercing, integrity, organization, speed, armor, readiness, entrenchment, defense, combatWidth;
+        //private double softAttack, hardAttack, piercing, integrity, organization, speed, armor, readiness, entrenchment, defense, combatWidth;
 
         public Unit(Equipment[] neededEquipment, int[] neededEquipmentAmount, int[] equipmentUseRate)
         {

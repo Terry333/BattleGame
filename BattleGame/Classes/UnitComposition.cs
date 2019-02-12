@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleGame.Classes
 {
-    class UnitComposition
+    struct UnitComposition
     {
         private List<Unit> units;
         private List<int> ratio;
