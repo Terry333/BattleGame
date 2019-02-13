@@ -39,6 +39,5 @@ namespace BattleGame.UI
             stackPanel.Children.Add(block);
             ScrollToBottom();
         }
-
     }
 }

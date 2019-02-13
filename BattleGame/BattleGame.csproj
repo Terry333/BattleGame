@@ -57,8 +57,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
-    <Compile Include="Classes\Database.cs" />
-    <Compile Include="StaticClasses\Terrain.cs" />
+    <Compile Include="Enums\ForestLevel.cs" />
+    <Compile Include="Enums\TerrainTypes.cs" />
+    <Compile Include="StaticClasses\TerrainData.cs" />
     <Compile Include="Classes\UnitComposition.cs" />
     <Compile Include="UI\ImageDrawing.cs" />
     <Compile Include="UI\MapControlFrame.cs" />

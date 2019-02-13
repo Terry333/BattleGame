@@ -15,8 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using BattleGame.Classes;
-using BattleGame.StaticClasses;
-using BattleGame.Classes.TerrainTypes;
 
 namespace BattleGame.UI
 {
@@ -34,8 +32,8 @@ namespace BattleGame.UI
         {
             this.Map = Map;
             this.Output = Output;
-            MapGrid = Map.GetMapGrid();
-            MapButtonGrid = Map.GetButtonGrid();
+            MapGrid = Map.MapSpaceGrid;
+            MapButtonGrid = Map.ButtonGrid;
 
             // Setting columns and rows in the grid.
 
@@ -98,7 +96,7 @@ namespace BattleGame.UI
                     {
                         for(int x = 0; x < textGrid.GetLength(1); x++)
                         {
-                            textGrid[y, x].Text = MapGrid[y, x].GetFunctioningInfrastructure().ToString() + "/" + MapGrid[y, x].GetInfrasctructureLevel().ToString();
+                            textGrid[y, x].Text = MapGrid[y, x].FunctioningInfrastructure.ToString() + "/" + MapGrid[y, x].InfrastructureLevel.ToString();
                         }
                     } 
                     break;

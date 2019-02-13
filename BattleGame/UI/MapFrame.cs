@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Media;
 using System.Diagnostics;
 using BattleGame.Classes;
+using BattleGame.Enums;
 
 
 namespace BattleGame.UI
@@ -24,9 +25,9 @@ namespace BattleGame.UI
     {
         private int xLength;
         private int yLength;
-        private MapSpace[,] mapSpaceGrid;
+        public MapSpace[,] MapSpaceGrid;
         private OutputFrame output;
-        private Button[,] buttonGrid;
+        public Button[,] ButtonGrid;
         private Canvas canvas;
 
         private System.Threading.Tasks.Task<int> time;
@@ -55,8 +56,8 @@ namespace BattleGame.UI
             this.Content = canvas;
 
             this.output = output;
-            mapSpaceGrid = new MapSpace[X,Y];
-            buttonGrid = new Button[X, Y];
+            MapSpaceGrid = new MapSpace[X,Y];
+            ButtonGrid = new Button[X, Y];
 
             this.KeyDown += MapKeyDown;
 
@@ -101,11 +102,12 @@ namespace BattleGame.UI
 
             string[] townY = { };
             string[] infraY = { };
-            object[,] terrainMap = { };
+            string[] forestY = { };
+            TerrainTypes[,] terrainMap = { };
 
             if(create)
             {
-                terrainMap = new object[xLength, yLength];
+                terrainMap = new TerrainTypes[xLength, yLength];
 
                 string[] terrainY = mapSections[1].Split('{');
 
@@ -115,27 +117,16 @@ namespace BattleGame.UI
 
                     for (int o = 0; o < xLength; o++)
                     {
-                        switch (terrainX[o])
-                        {
-                            case "p":
-                                terrainMap[i, o] = Terrain.Plains();
-                                break;
-                            case "h":
-                                terrainMap[i, o] = Terrain.Plains;
-                                break;
-                            case "ma":
-                                terrainMap[i, o] = Terrain.Plains;
-                                break;
-                            default:
-                                terrainMap[i, o] = Terrain.Plains;
-                                break;
-                        }
+                        int Value = Convert.ToInt16(terrainX[o]);
+                        terrainMap[i, o] = (TerrainTypes) Value;
                     }
                 }
 
                 townY = mapSections[2].Split('{');
 
                 infraY = mapSections[3].Split('{');
+
+                forestY = mapSections[4].Split('{');
             }
 
             Boolean isOdd = true;
@@ -152,6 +143,7 @@ namespace BattleGame.UI
 
                 string[] townX = { };
                 string[] infraX = { };
+                string[] forestX = { };
 
                 if (create)
                 {
@@ -159,6 +151,8 @@ namespace BattleGame.UI
                     townX = townY[y].Split(';');
 
                     infraX = infraY[y].Split(';');
+
+                    forestX = forestY[y].Split(';');
                 }
 
                 for (int x = 0; x < xLength; x++)
@@ -171,42 +165,25 @@ namespace BattleGame.UI
 
                     if(create)
                     {
-                        mapSpaceGrid[x, y] = new MapSpace(x, y, terrainMap[x, y]);
-                        mapSpaceGrid[x, y].GetButton().Name = "Button" + x.ToString() + y.ToString();
-                        buttonGrid[x, y] = mapSpaceGrid[x, y].GetButton();
-                        canvas.Children.Add(buttonGrid[x, y]);
+                        MapSpaceGrid[x, y] = new MapSpace(x, y);
+                        MapSpaceGrid[x, y].GetButton().Name = "Button" + x.ToString() + y.ToString();
+                        ButtonGrid[x, y] = MapSpaceGrid[x, y].GetButton();
+                        canvas.Children.Add(ButtonGrid[x, y]);
 
-                        buttonGrid[x, y].Click += MapSpaceClick;
+                        ButtonGrid[x, y].Click += MapSpaceClick;
 
-                        Debug.WriteLine("Town level " + townX[x]);
+                        MapSpaceGrid[x, y].TownLevel = Convert.ToInt32(townX[x]);
 
-                        mapSpaceGrid[x, y].SetTownLevel(Convert.ToInt32(townX[x]));
-
-                        mapSpaceGrid[x, y].SetInfrastructureLevel(Convert.ToInt32(infraX[x]));
+                        MapSpaceGrid[x, y].SetInfrastructureLevel(Convert.ToInt32(infraX[x]));
                     }
                     
 
-                    buttonGrid[x, y].Width = width;
-                    buttonGrid[x, y].Height = height;
-                    Canvas.SetTop(buttonGrid[x, y], yMod);
-                    Canvas.SetLeft(buttonGrid[x, y], xMod);
+                    ButtonGrid[x, y].Width = width;
+                    ButtonGrid[x, y].Height = height;
+                    Canvas.SetTop(ButtonGrid[x, y], yMod);
+                    Canvas.SetLeft(ButtonGrid[x, y], xMod);
                 }
             }
-        }
-
-        public MapSpace GetMapSpaceFromMapGrid(int x, int y)
-        {
-            return mapSpaceGrid[y, x];
-        }
-
-        public Button[,] GetButtonGrid()
-        {
-            return buttonGrid;
-        }
-
-        public MapSpace[,] GetMapGrid()
-        {
-            return mapSpaceGrid;
         }
 
         private MapSpace GetAssociatedMapSpaceFromButton(Button button)
@@ -215,9 +192,9 @@ namespace BattleGame.UI
             {
                 for (int o = 0; o < yLength; o++)
                 {
-                    if(button == buttonGrid[i,o])
+                    if(button == ButtonGrid[i,o])
                     {
-                        return mapSpaceGrid[i, o];
+                        return MapSpaceGrid[i, o];
                     }
                 }
             }
@@ -257,40 +234,27 @@ namespace BattleGame.UI
                     if (x != 0 && y != 0)
                     {
                         Button button = (Button)VisualTreeHelper.GetChild(canvas, x * y);
-                        DependencyObject obj = VisualTreeHelper.GetChild(buttonGrid[y, x], 0);
+                        DependencyObject obj = VisualTreeHelper.GetChild(ButtonGrid[y, x], 0);
                         Grid grid = (Grid)obj;
                         returnArray[x, y] = (TextBlock)VisualTreeHelper.GetChild(grid, 1);
                     }
                     else
                     {
                         Button button = (Button)VisualTreeHelper.GetChild(canvas, y);
-                        DependencyObject obj = VisualTreeHelper.GetChild(buttonGrid[y, x], 0);
+                        DependencyObject obj = VisualTreeHelper.GetChild(ButtonGrid[y, x], 0);
                         Grid grid = (Grid)obj;
                         returnArray[x, y] = (TextBlock)VisualTreeHelper.GetChild(grid, 1);
                     }
-
                 }
             }
             return returnArray;
         }
 
-        public void ChangeAllSpaceText(string newText)
-        {
-            Canvas canvas = (Canvas) VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(GetVisualChild(0), 1), 0);
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(canvas); i++)
-            {
-                Button button = (Button)VisualTreeHelper.GetChild(canvas, i);
-                Grid grid = (Grid)VisualTreeHelper.GetChild(button, 0);
-                TextBlock block = (TextBlock)VisualTreeHelper.GetChild(grid, 1);
-                block.Text = newText;
-            }
-        }
-
         public void MapSpaceClick(object sender, RoutedEventArgs e)
         {
             MapSpace space = GetAssociatedMapSpaceFromButton((Button) sender);
-            output.postMessage(space.getX().ToString() + ", " + space.getY().ToString());
-            output.postMessage(space.getTerrainType().);
+            output.postMessage(space.X.ToString() + ", " + space.Y.ToString());
+            output.postMessage(Enum.GetName(typeof(TerrainTypes), space.TerrainType));
         }
     }
 }

@@ -14,50 +14,31 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using BattleGame.UI;
+using BattleGame.Enums;
 
 namespace BattleGame.Classes
 {
     class MapSpace : HexButton
     {
-        private object terrainType;
-        private SuppliesStorage storage;
-        private int X, Y;
-        private Player owner;
-        private int infrastructureLevel, functioningInfrastructure, townLevel;
+        public TerrainTypes TerrainType;
+        public SuppliesStorage Storage;
+        public int X, Y;
+        public Player owner;
+        public int InfrastructureLevel, FunctioningInfrastructure, TownLevel;
+        public ForestLevel ForestLevel;
 
-        public MapSpace(int X, int Y, object terrainType)
+        public MapSpace(int X, int Y)
         {
             this.X = X;
             this.Y = Y;
-            this.terrainType = terrainType;
-            storage = new SuppliesStorage(double.MaxValue);
-        }
-
-        public int getX()
-        {
-            return Y;
-        }
-
-        public int getY()
-        {
-            return X;
-        }
-
-        public object getTerrainType()
-        {
-            return terrainType;
-        }
-
-        public List<Equipment> getItemsOnSpace()
-        {
-            return storage.getStorageList();
+            Storage = new SuppliesStorage(double.MaxValue);
         }
 
         public bool placeItemInSpace(Equipment item)
         {
-            if(storage.addItem(item))
+            if(Storage.addItem(item))
             {
-                item.changeOwner(storage);
+                item.changeOwner(Storage);
                 return true;
             }
             return false;
@@ -65,12 +46,7 @@ namespace BattleGame.Classes
 
         public List<Equipment> takeItem(Object newOwner, String name, int amount)
         {
-            return storage.takeItem(newOwner, name, amount);
-        }
-
-        public List<Equipment> getStorageList()
-        {
-            return storage.getStorageList();
+            return Storage.takeItem(newOwner, name, amount);
         }
 
         public void ChangeOwner(Player newOwner)
@@ -78,35 +54,10 @@ namespace BattleGame.Classes
             owner = newOwner;
         }
 
-        public Player GetOwner()
-        {
-            return owner;
-        }
-
         public void SetInfrastructureLevel(int level)
         {
-            infrastructureLevel = level;
-            functioningInfrastructure = level;
-        }
-
-        public void SetTownLevel(int level)
-        {
-            townLevel = level;
-        }
-
-        public int GetInfrasctructureLevel()
-        {
-            return infrastructureLevel;
-        }
-
-        public int GetFunctioningInfrastructure()
-        {
-            return functioningInfrastructure;
-        }
-
-        public int GetTownLevel()
-        {
-            return townLevel;
+            InfrastructureLevel = level;
+            FunctioningInfrastructure = level;
         }
     }
 }
