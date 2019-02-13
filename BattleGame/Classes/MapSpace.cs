@@ -19,13 +19,13 @@ namespace BattleGame.Classes
 {
     class MapSpace : HexButton
     {
-        private TerrainTypes.Terrain terrainType;
+        private object terrainType;
         private SuppliesStorage storage;
         private int X, Y;
         private Player owner;
         private int infrastructureLevel, functioningInfrastructure, townLevel;
 
-        public MapSpace(int X, int Y, TerrainTypes.Terrain terrainType)
+        public MapSpace(int X, int Y, object terrainType)
         {
             this.X = X;
             this.Y = Y;
@@ -43,7 +43,7 @@ namespace BattleGame.Classes
             return X;
         }
 
-        public TerrainTypes.Terrain getTerrainType()
+        public object getTerrainType()
         {
             return terrainType;
         }
@@ -71,17 +71,6 @@ namespace BattleGame.Classes
         public List<Equipment> getStorageList()
         {
             return storage.getStorageList();
-        }
-
-        public Button GetButton()
-        {
-            this.RemoveLogicalChild(this.Button);
-            return (Button) this.Button;
-        }
-
-        public Button GetButtonNoRemove()
-        {
-            return (Button)this.Button;
         }
 
         public void ChangeOwner(Player newOwner)

@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 using System.Media;
 using System.Diagnostics;
 using BattleGame.Classes;
-using BattleGame.Classes.TerrainTypes;
 
 
 namespace BattleGame.UI
@@ -102,11 +101,11 @@ namespace BattleGame.UI
 
             string[] townY = { };
             string[] infraY = { };
-            Terrain[,] terrainMap = { };
+            object[,] terrainMap = { };
 
             if(create)
             {
-                terrainMap = new Terrain[xLength, yLength];
+                terrainMap = new object[xLength, yLength];
 
                 string[] terrainY = mapSections[1].Split('{');
 
@@ -119,16 +118,16 @@ namespace BattleGame.UI
                         switch (terrainX[o])
                         {
                             case "p":
-                                terrainMap[i, o] = new Plains();
+                                terrainMap[i, o] = Terrain.Plains();
                                 break;
                             case "h":
-                                terrainMap[i, o] = new Hills();
+                                terrainMap[i, o] = Terrain.Plains;
                                 break;
                             case "ma":
-                                terrainMap[i, o] = new Marsh();
+                                terrainMap[i, o] = Terrain.Plains;
                                 break;
                             default:
-                                terrainMap[i, o] = new Plains();
+                                terrainMap[i, o] = Terrain.Plains;
                                 break;
                         }
                     }
@@ -291,7 +290,7 @@ namespace BattleGame.UI
         {
             MapSpace space = GetAssociatedMapSpaceFromButton((Button) sender);
             output.postMessage(space.getX().ToString() + ", " + space.getY().ToString());
-            output.postMessage(space.GetFunctioningInfrastructure().ToString() + "/" + space.GetInfrasctructureLevel().ToString());
+            output.postMessage(space.getTerrainType().);
         }
     }
 }

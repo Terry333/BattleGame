@@ -57,9 +57,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
-    <Compile Include="Classes\TerrainTypes\Marsh.cs" />
+    <Compile Include="Classes\Database.cs" />
+    <Compile Include="StaticClasses\Terrain.cs" />
     <Compile Include="Classes\UnitComposition.cs" />
-    <Compile Include="StaticClasses\UIHelper.cs" />
     <Compile Include="UI\ImageDrawing.cs" />
     <Compile Include="UI\MapControlFrame.cs" />
     <Compile Include="UI\HexButton.xaml.cs">
@@ -80,10 +80,6 @@
     <Compile Include="Classes\Equipment.cs" />
     <Compile Include="Classes\MapSpace.cs" />
     <Compile Include="Classes\SupplyNeededList.cs" />
-    <Compile Include="Classes\TerrainTypes\River.cs" />
-    <Compile Include="Classes\TerrainTypes\Hills.cs" />
-    <Compile Include="Classes\TerrainTypes\Plains.cs" />
-    <Compile Include="Classes\TerrainTypes\Terrain.cs" />
     <Compile Include="Classes\Unit.cs" />
     <Compile Include="Classes\UnitGroup.cs" />
     <Compile Include="MainWindow.xaml.cs">
