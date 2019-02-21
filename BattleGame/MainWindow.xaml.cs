@@ -60,17 +60,26 @@ namespace BattleGame
             grid.Children.Add(rightGrid);
             grid.Children.Add(leftGrid);
 
-            this.output = new OutputFrame();
+            InfoControl info = new InfoControl();
 
-            Grid.SetRow(output, 1);
-            Grid.SetColumn(output, 1);
+            TabControl tabCtrl = info.TabCtrl;
 
-            rightGrid.Children.Add(output);
+            Grid.SetRow(tabCtrl, 1);
+            Grid.SetColumn(tabCtrl, 1);
+
+            rightGrid.Children.Add(tabCtrl);
+
+            this.output = info.Output;
+
+            //Grid.SetRow(output, 1);
+            //Grid.SetColumn(output, 1);
+
+            //rightGrid.Children.Add(output);
 
             MapFrame map = new MapFrame(locationString, output);
             Grid.SetRow(map, 1);
             Grid.SetColumn(map, 0);
-            
+
             leftGrid.Children.Add(map);
 
             this.Content = grid;

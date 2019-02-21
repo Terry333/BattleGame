@@ -13,25 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using BattleGame.Classes;
 
-namespace BattleGame.Classes
+namespace BattleGame
 {
-    abstract class Unit
+    public abstract class Unit
     {
-        private SupplyNeededList supplyList;
-        //private double softAttack, hardAttack, piercing, integrity, organization, speed, armor, readiness, entrenchment, defense, combatWidth;
+        SupplyNeededList SupplyList;
+        public List<Man> ManList;
+        public string Name;
+        Officer leader;
+        public List<Man> AttachedPrisoners;
 
-        public Unit(Equipment[] neededEquipment, int[] neededEquipmentAmount, int[] equipmentUseRate)
-        {
-            supplyList = new SupplyNeededList(neededEquipment, neededEquipmentAmount, equipmentUseRate);
-        }
+        //private double softAttack, hardAttack, piercing, integrity, organization, speed, armor, readiness, entrenchment, defense, combatWidth;
 
         private void calculateValues()
         {
-            Equipment[] equipment = supplyList.getNeededEquipment();
-            int[] amount = supplyList.getNeededEquipmentAmount();
-
-            
+            Equipment[] equipment = SupplyList.getNeededEquipment();
+            int[] amount = SupplyList.getNeededEquipmentAmount();
         }
     }
 }

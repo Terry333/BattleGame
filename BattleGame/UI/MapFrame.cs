@@ -30,8 +30,6 @@ namespace BattleGame.UI
         public Button[,] ButtonGrid;
         private Canvas canvas;
 
-        private System.Threading.Tasks.Task<int> time;
-
         public MapFrame(string locationFile, OutputFrame output)
         {
             string mapInputData = System.IO.File.ReadAllText(@locationFile);
@@ -61,18 +59,7 @@ namespace BattleGame.UI
 
             this.KeyDown += MapKeyDown;
 
-            UpdateZoom(1, true, mapSections);
-
-            CancellationTokenSource source = new CancellationTokenSource();
-
-            time = Task.Run(async delegate
-            {
-                await Task.Delay(TimeSpan.FromSeconds(1/30));
-                return 42;
-            });
-            source.Cancel();
-
-            
+            UpdateZoom(1, true, mapSections);        
         }
 
         private void MapKeyDown(object sender, KeyEventArgs e)
@@ -234,8 +221,7 @@ namespace BattleGame.UI
                     if (x != 0 && y != 0)
                     {
                         Button button = (Button)VisualTreeHelper.GetChild(canvas, x * y);
-                        DependencyObject obj = VisualTreeHelper.GetChild(ButtonGrid[y, x], 0);
-                        Grid grid = (Grid)obj;
+                        Grid grid = (Grid) VisualTreeHelper.GetChild(ButtonGrid[y, x], 0);
                         returnArray[x, y] = (TextBlock)VisualTreeHelper.GetChild(grid, 1);
                     }
                     else

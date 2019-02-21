@@ -13,48 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using BattleGame.Classes;
 
-namespace BattleGame.Classes
+namespace BattleGame
 {
-    class Equipment
+    abstract class Equipment
     {
-        private String name;
-        private double weight, reliability, softAttack, hardAttack, piercing, armor, integrity, organization;
-        private Object usedBy;
-
-        public void equipment(String name, double weight, double reliability)
-        {
-            this.name = name;
-            this.reliability = reliability;
-            this.weight = weight;
-
-        }
+        public String Name;
+        public double Weight, Reliability, SoftAttack, HardAttack, Piercing, Armor, Integrity, Organization;
+        public Object UsedBy;
 
         public void changeOwner(Object newOwner)
         {
             if(newOwner is SuppliesStorage)
             {
-                usedBy = newOwner;
+                UsedBy = newOwner;
             }
             else if(newOwner is Unit)
             {
 
             }
-        }
-
-        public double getWeight()
-        {
-            return weight;
-        }
-
-        public double getReliability()
-        {
-            return reliability;
-        }
-        
-        public String getName()
-        {
-            return name;
         }
     }
 }

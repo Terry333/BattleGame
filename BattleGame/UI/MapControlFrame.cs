@@ -27,6 +27,7 @@ namespace BattleGame.UI
         private Button[,] MapButtonGrid;
         private MapSpace[,] MapGrid;
         private OutputFrame Output;
+        private readonly string TextureFolderLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, @"..\\..\\")) + "GameData\\Textures";
 
         public MapControlFrame(MapFrame Map, OutputFrame Output)
         {
@@ -62,7 +63,6 @@ namespace BattleGame.UI
             // Creating the show infrastructure button.
 
             ShowInfrastructure = new HexButton();
-            //ShowInfrastructure.SetText("Show Infrastructure");
             ShowInfrastructure.GetButton().Click += InfraClick;
 
             // Setting the positions of the UI elements.
@@ -77,11 +77,42 @@ namespace BattleGame.UI
 
             this.Children.Add(MapZoom);
             this.Children.Add(ShowInfrastructure.GetButton());
+
+            Button button = (Button)VisualTreeHelper.GetChild(this, 1);
+            SetButtonImage(1, TextureFolderLocation + "\\InfrastructureIcon.png");
         }
 
         private void ScrollEvent(object sender, RoutedEventArgs e)
         {
             Map.UpdateZoom(MapZoom.Value, false, null);
+        }
+
+        private void SetButtonImage(int index, string imagePath)
+        {
+            Button button = (Button)GetVisualChild(index);
+            Debug.WriteLine(VisualTreeHelper.GetChildrenCount(button).ToString());
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(button); i++)
+            {
+                Debug.WriteLine(i.ToString() + ";    " + VisualTreeHelper.GetChild(button, i));
+            }
+
+            Image img = new Image();
+            img.Loaded += ImageLoaded;
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.DecodePixelWidth = 200;
+            bitmap.DecodePixelHeight = 200;
+            bitmap.UriSource = new Uri(TextureFolderLocation + "\\InfrastructureIcon.png");
+            bitmap.EndInit();
+
+            img.Source = bitmap;
+            button.Content = img;
+        }
+
+        private void ImageLoaded(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void InfraClick(object sender, RoutedEventArgs e)

@@ -10,19 +10,20 @@
       
 
     
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Height="120" Width="110" x:Name="Button" BorderBrush="sc#1, 0, 0, 0" BorderThickness ="10" Foreground="Black" FontSize="32">
+    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Height="120" Width="110" x:Name="Button" BorderBrush="sc#1, 0, 0, 0" BorderThickness ="10" Foreground="Black" FontSize="32">
         <Button.Template>
             <ControlTemplate TargetType="{x:Type Button}" x:Name="ControlTemp">
                 <Grid Width="Auto" Height="Auto" x:Name="Grid">
                     <Path Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Width="Auto" Height="Auto" x:Name="Path" RenderTransformOrigin="0.5,0.5" Stretch="Fill" Data="M60,0 L100,20 100,55 60,75 20,55 20,20 60,0 z"/>
                     <TextBlock VerticalAlignment="Center" Text="" HorizontalAlignment="Center" Margin="0" x:Name="TextBlock" TextWrapping="Wrap" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" FontStyle="{TemplateBinding FontStyle}" FontWeight="{TemplateBinding FontWeight}" FontStretch="{TemplateBinding FontStretch}" Foreground="{TemplateBinding Foreground}"/>
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Center"  />
                 </Grid>
             </ControlTemplate>
             </Button.Template>
         <Button.Background>
             <SolidColorBrush Opacity="0" Color="LightGray"/>
         </Button.Background>
-        </Button>
+    </Button>
 
     
 </Page>

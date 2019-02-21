@@ -57,8 +57,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
+    <Compile Include="Classes\InfantryWeapon.cs" />
+    <Compile Include="Classes\Man.cs" />
+    <Compile Include="Classes\Men\Officer.cs" />
+    <Compile Include="Classes\Men\Infantry.cs" />
+    <Compile Include="Classes\Platoon.cs" />
+    <Compile Include="Classes\SuperUnit.cs" />
+    <Compile Include="Classes\UnitTypes\Company.cs" />
     <Compile Include="Enums\ForestLevel.cs" />
+    <Compile Include="Enums\ManStatus.cs" />
     <Compile Include="Enums\TerrainTypes.cs" />
+    <Compile Include="StaticClasses\NameGenerator.cs" />
+    <Compile Include="Structs\HungerStatus.cs" />
     <Compile Include="StaticClasses\TerrainData.cs" />
     <Compile Include="Classes\UnitComposition.cs" />
     <Compile Include="UI\ImageDrawing.cs" />
@@ -68,6 +78,9 @@
     </Compile>
     <Compile Include="UI\MapFrame.cs" />
     <Compile Include="UI\OutputFrame.cs" />
+    <Compile Include="UI\InfoControl.xaml.cs">
+      <DependentUpon>InfoControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,12 +95,15 @@
     <Compile Include="Classes\MapSpace.cs" />
     <Compile Include="Classes\SupplyNeededList.cs" />
     <Compile Include="Classes\Unit.cs" />
-    <Compile Include="Classes\UnitGroup.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\HexButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\InfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,7 +135,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Equipment\" />
+    <Folder Include="Classes\Equipment\" />
     <Folder Include="MapImageOverlay\" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GameData\MapDataInstructions.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\Textures\InfrastructureIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,7 +24,7 @@ namespace BattleGame.Classes
         public SuppliesStorage Storage;
         public int X, Y;
         public Player owner;
-        public int InfrastructureLevel, FunctioningInfrastructure, TownLevel;
+        public int InfrastructureLevel, FunctioningInfrastructure, TownLevel, MissingMen;
         public ForestLevel ForestLevel;
 
         public MapSpace(int X, int Y)
@@ -58,6 +58,11 @@ namespace BattleGame.Classes
         {
             InfrastructureLevel = level;
             FunctioningInfrastructure = level;
+        }
+
+        public void AcceptUnit()
+        {
+
         }
     }
 }
