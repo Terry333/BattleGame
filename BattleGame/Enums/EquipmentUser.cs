@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BattleGame.Classes;
 
-namespace BattleGame
+namespace BattleGame.Enums
 {
-    abstract class InfantryWeapon : Equipment
+    enum EquipmentUser
     {
-        base.UsedBy 
-    }
+        Infantry
+        
+
+    };
 }

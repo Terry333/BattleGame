@@ -56,14 +56,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Ammunition.cs" />
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
-    <Compile Include="Classes\InfantryWeapon.cs" />
+    <Compile Include="Classes\Equipment\M14.cs" />
     <Compile Include="Classes\Man.cs" />
     <Compile Include="Classes\Men\Officer.cs" />
     <Compile Include="Classes\Men\Infantry.cs" />
     <Compile Include="Classes\Platoon.cs" />
     <Compile Include="Classes\SuperUnit.cs" />
     <Compile Include="Classes\UnitTypes\Company.cs" />
+    <Compile Include="Enums\Caliber.cs" />
+    <Compile Include="Enums\EquipmentUser.cs" />
     <Compile Include="Enums\ForestLevel.cs" />
     <Compile Include="Enums\ManStatus.cs" />
     <Compile Include="Enums\TerrainTypes.cs" />
@@ -135,7 +138,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\Equipment\" />
+    <Folder Include="Classes\Ammunition\" />
     <Folder Include="MapImageOverlay\" />
   </ItemGroup>
   <ItemGroup>
