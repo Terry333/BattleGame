@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BattleGame.Enums;
 
 namespace BattleGame.Classes
 {
@@ -10,18 +11,15 @@ namespace BattleGame.Classes
     {
         public SuppliesStorage HeldBy;
         public bool Used;
-        public string Caliber;
+        public Enum Caliber;
+        public String Name;
 
-        public Ammunition(SuppliesStorage start, string name)
+        public Ammunition(SuppliesStorage start, Enum type, String name)
         {
             Used = false;
             HeldBy = start;
-            Caliber = name;
-        }
-
-        public new string ToString()
-        {
-            return Caliber;
+            Caliber = type;
+            Name = name;
         }
     }
 }

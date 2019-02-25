@@ -20,11 +20,11 @@ namespace BattleGame.Classes
 
         public bool addItem(Equipment item)
         {
-            if(weight + item.getWeight() <= maxWeight)
+            if(weight + item.Weight <= maxWeight)
             {
                 storage.Add(item);
                 item.changeOwner(this);
-                weight = weight + item.getWeight();
+                weight = weight + item.Weight;
                 return true;
             }
             return false;
@@ -38,11 +38,11 @@ namespace BattleGame.Classes
 
             foreach(Equipment i in storage)
             {
-                if((i.getName() == name) && (amountCount < amount))
+                if((i.Name == name) && (amountCount < amount))
                 {
                     returnList.Add(i);
                     i.changeOwner(newOwner);
-                    weight = weight - i.getWeight();
+                    weight = weight - i.Weight;
                     amountCount++;
                     if(amountCount == amount)
                     {

@@ -25,7 +25,6 @@ namespace BattleGame.UI
         public InfoControl()
         {
             InitializeComponent();
-            Output.postMessage("maga");
             RemoveLogicalChild(TabCtrl);
         }
     }

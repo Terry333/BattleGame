@@ -22,7 +22,7 @@ namespace BattleGame.UI
     {
         private MapFrame Map;
         private ScrollBar MapZoom;
-        private HexButton ShowInfrastructure;
+        private Button ShowInfrastructure;
         private Boolean InfraShowing = false;
         private Button[,] MapButtonGrid;
         private MapSpace[,] MapGrid;
@@ -62,21 +62,21 @@ namespace BattleGame.UI
 
             // Creating the show infrastructure button.
 
-            ShowInfrastructure = new HexButton();
-            ShowInfrastructure.GetButton().Click += InfraClick;
+            ShowInfrastructure = new Button();
+            ShowInfrastructure.Click += InfraClick;
 
             // Setting the positions of the UI elements.
 
             Grid.SetRow(MapZoom, 0);
             Grid.SetColumn(MapZoom, 0);
 
-            Grid.SetRow(ShowInfrastructure.GetButton(), 1);
-            Grid.SetColumn(ShowInfrastructure.GetButton(), 0);
+            Grid.SetRow(ShowInfrastructure, 1);
+            Grid.SetColumn(ShowInfrastructure, 0);
             
             // Adding the UI elements to the grid.
 
             this.Children.Add(MapZoom);
-            this.Children.Add(ShowInfrastructure.GetButton());
+            this.Children.Add(ShowInfrastructure);
 
             Button button = (Button)VisualTreeHelper.GetChild(this, 1);
             SetButtonImage(1, TextureFolderLocation + "\\InfrastructureIcon.png");
