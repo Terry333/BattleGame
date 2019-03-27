@@ -22,7 +22,7 @@ namespace BattleGame.UI
     {
         private MapFrame Map;
         private ScrollBar MapZoom;
-        private Button ShowInfrastructure;
+        private Button ShowInfrastructure, ShowAgencies, ShowGov;
         private Boolean InfraShowing = false;
         private Button[,] MapButtonGrid;
         private MapSpace[,] MapGrid;
@@ -60,10 +60,17 @@ namespace BattleGame.UI
             MapZoom.Value = 1;
             
 
-            // Creating the show infrastructure button.
+            // Creating the buttons.
 
             ShowInfrastructure = new Button();
             ShowInfrastructure.Click += InfraClick;
+
+            ShowAgencies = new Button();
+            ShowAgencies.Click += AgencyClick;
+
+            ShowGov = new Button();
+            ShowGov += GovClick;
+
 
             // Setting the positions of the UI elements.
 
@@ -72,14 +79,21 @@ namespace BattleGame.UI
 
             Grid.SetRow(ShowInfrastructure, 1);
             Grid.SetColumn(ShowInfrastructure, 0);
-            
+
+            Grid.SetRow(ShowAgencies, 1);
+            Grid.SetColumn(ShowAgencies, 1);
+
             // Adding the UI elements to the grid.
 
             this.Children.Add(MapZoom);
             this.Children.Add(ShowInfrastructure);
+            this.Children.Add(ShowAgencies);
 
             Button button = (Button)VisualTreeHelper.GetChild(this, 1);
             SetButtonImage(1, TextureFolderLocation + "\\InfrastructureIcon.png");
+
+            button = (Button)VisualTreeHelper.GetChild(this, 2);
+            SetButtonImage(2, TextureFolderLocation + "\\EmptyClipboard.png");
         }
 
         private void ScrollEvent(object sender, RoutedEventArgs e)
@@ -93,7 +107,7 @@ namespace BattleGame.UI
             Debug.WriteLine(VisualTreeHelper.GetChildrenCount(button).ToString());
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(button); i++)
             {
-                Debug.WriteLine(i.ToString() + ";    " + VisualTreeHelper.GetChild(button, i));
+                Debug.WriteLine(i.ToString() + ";    " + VisualTreeHelper.GetChild(this, i));
             }
 
             Image img = new Image();
@@ -101,9 +115,9 @@ namespace BattleGame.UI
 
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.DecodePixelWidth = 200;
-            bitmap.DecodePixelHeight = 200;
-            bitmap.UriSource = new Uri(TextureFolderLocation + "\\InfrastructureIcon.png");
+            bitmap.DecodePixelWidth = bitmap.PixelWidth;
+            bitmap.DecodePixelHeight = bitmap.PixelHeight;
+            bitmap.UriSource = new Uri(imagePath);
             bitmap.EndInit();
 
             img.Source = bitmap;
@@ -143,6 +157,16 @@ namespace BattleGame.UI
                     InfraShowing = false;
                     break;
             }
+        }
+
+        private void AgencyClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GovClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

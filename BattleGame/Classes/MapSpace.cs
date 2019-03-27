@@ -38,15 +38,10 @@ namespace BattleGame.Classes
         {
             if(Storage.addItem(item))
             {
-                item.changeOwner(Storage);
+                item.changeOwner(null, Storage);
                 return true;
             }
             return false;
-        }
-
-        public List<Equipment> takeItem(Object newOwner, String name, int amount)
-        {
-            return Storage.takeItem(newOwner, name, amount);
         }
 
         public void ChangeOwner(Player newOwner)

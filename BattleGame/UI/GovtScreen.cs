@@ -12,28 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 using System.Diagnostics;
+using System.Threading;
+using BattleGame.UI;
 using BattleGame.Classes;
 
-namespace BattleGame
+namespace BattleGame.UI
 {
-    abstract class Equipment
+    class GovtScreen : Window
     {
-        public String Name;
-        public double Weight, Reliability, SoftAttack, HardAttack, Piercing, Armor, Integrity, Organization;
-        public Object UsedBy;
-
-        public void changeOwner(Unit newOwner = null, SuppliesStorage newStorage = null)
+        public GovtScreen()
         {
+            Width = 600;
+            Height = 400;
             
-            if(newOwner != null)
-            {
-                
-            }
-            else if(newStorage != null)
-            {
-                
-            }
+
         }
     }
 }

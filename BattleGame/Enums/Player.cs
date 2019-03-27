@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleGame.Classes.Unit
+namespace BattleGame.Enums
 {
-    class Company : SuperUnit
+    enum Player
     {
-
+        USA,
+        USSR
     }
 }

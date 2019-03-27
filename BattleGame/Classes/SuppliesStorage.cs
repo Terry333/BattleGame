@@ -8,7 +8,7 @@ namespace BattleGame.Classes
 {
     class SuppliesStorage
     {
-        private List<Equipment> storage;
+        public List<Equipment> storage;
         private double weight = 0;
         private double maxWeight;
 
@@ -23,14 +23,14 @@ namespace BattleGame.Classes
             if(weight + item.Weight <= maxWeight)
             {
                 storage.Add(item);
-                item.changeOwner(this);
+                item.changeOwner(null, this);
                 weight = weight + item.Weight;
                 return true;
             }
             return false;
         }
 
-        public List<Equipment> takeItem(Object newOwner, String name, int amount)
+        public List<Equipment> takeItem(String name, int amount, Unit unit = null, SuppliesStorage newStorage = null)
         {
             List<Equipment> returnList = new List<Equipment>();
 
@@ -41,7 +41,18 @@ namespace BattleGame.Classes
                 if((i.Name == name) && (amountCount < amount))
                 {
                     returnList.Add(i);
-                    i.changeOwner(newOwner);
+                    if(unit != null)
+                    {
+                        unit.Storage.addItem(i);
+                    }
+                    else if(newStorage != null)
+                    {
+                        newStorage.addItem(i);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Both unit and newStorage cannot be null");
+                    }
                     weight = weight - i.Weight;
                     amountCount++;
                     if(amountCount == amount)
@@ -57,11 +68,6 @@ namespace BattleGame.Classes
             }
 
             return null;
-        }
-
-        public List<Equipment> getStorageList()
-        {
-            return storage;
         }
     }
 }

@@ -58,23 +58,28 @@
     </ApplicationDefinition>
     <Compile Include="Classes\Ammunition.cs" />
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
+    <Compile Include="Classes\Equipment\AKM.cs" />
     <Compile Include="Classes\Equipment\M14.cs" />
+    <Compile Include="Classes\SubUnit.cs" />
     <Compile Include="Classes\Man.cs" />
     <Compile Include="Classes\Men\Officer.cs" />
     <Compile Include="Classes\Men\Infantry.cs" />
-    <Compile Include="Classes\Platoon.cs" />
     <Compile Include="Classes\SuperUnit.cs" />
-    <Compile Include="Classes\UnitTypes\Company.cs" />
     <Compile Include="Enums\Caliber.cs" />
     <Compile Include="Enums\EquipmentUser.cs" />
     <Compile Include="Enums\ForestLevel.cs" />
+    <Compile Include="Enums\HexSides.cs" />
     <Compile Include="Enums\ManStatus.cs" />
+    <Compile Include="Enums\Player.cs" />
     <Compile Include="Enums\TerrainTypes.cs" />
+    <Compile Include="Enums\UnitModifier.cs" />
+    <Compile Include="Enums\UnitSize.cs" />
+    <Compile Include="Enums\UnitTypes.cs" />
     <Compile Include="StaticClasses\NameGenerator.cs" />
     <Compile Include="Structs\HungerStatus.cs" />
     <Compile Include="StaticClasses\TerrainData.cs" />
-    <Compile Include="Classes\UnitComposition.cs" />
     <Compile Include="UI\ImageDrawing.cs" />
+    <Compile Include="UI\GovtScreen.cs" />
     <Compile Include="UI\MapControlFrame.cs" />
     <Compile Include="UI\HexButton.xaml.cs">
       <DependentUpon>HexButton.xaml</DependentUpon>
@@ -84,6 +89,7 @@
     <Compile Include="UI\InfoControl.xaml.cs">
       <DependentUpon>InfoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ViewControl.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -149,6 +155,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GameData\Textures\InfrastructureIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\Textures\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\Textures\EmptyClipboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\Textures\Clipboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\Textures\mapIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

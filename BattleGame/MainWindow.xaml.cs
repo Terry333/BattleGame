@@ -39,8 +39,10 @@ namespace BattleGame
             grid.RowDefinitions.Add(new RowDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
 
             Grid leftGrid = new Grid();
+            leftGrid.RowDefinitions.Add(new RowDefinition());
             leftGrid.RowDefinitions.Add(new RowDefinition());
             leftGrid.RowDefinitions.Add(new RowDefinition());
             leftGrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -49,13 +51,13 @@ namespace BattleGame
             rightGrid.RowDefinitions.Add(new RowDefinition());
             rightGrid.RowDefinitions.Add(new RowDefinition());
             rightGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            rightGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
             Grid.SetRow(leftGrid, 0);
             Grid.SetColumn(leftGrid, 0);
+            leftGrid.SetValue(Grid.ColumnSpanProperty, 2);
 
             Grid.SetRow(rightGrid, 0);
-            Grid.SetColumn(rightGrid, 1);
+            Grid.SetColumn(rightGrid, 2); 
 
             grid.Children.Add(rightGrid);
             grid.Children.Add(leftGrid);
@@ -65,24 +67,29 @@ namespace BattleGame
             TabControl tabCtrl = info.TabCtrl;
 
             Grid.SetRow(tabCtrl, 1);
-            Grid.SetColumn(tabCtrl, 1);
+            Grid.SetColumn(tabCtrl, 0);
 
             rightGrid.Children.Add(tabCtrl);
 
             this.output = info.Output;
-
-            //Grid.SetRow(output, 1);
-            //Grid.SetColumn(output, 1);
-
-            //rightGrid.Children.Add(output);
+            Player player = new Player("USA", 20, 20, info.OrderOfBattle);
+            player.AddUnit(new SuperUnit("2nd Infantry Division"));
 
             MapFrame map = new MapFrame(locationString, output);
             Grid.SetRow(map, 1);
             Grid.SetColumn(map, 0);
+            map.SetValue(Grid.RowSpanProperty, 2);
 
             leftGrid.Children.Add(map);
 
             this.Content = grid;
+
+            MapControlFrame mapControl = new MapControlFrame(map, output);
+
+            Grid.SetRow(mapControl, 0);
+            Grid.SetColumn(mapControl, 0);
+
+            leftGrid.Children.Add(mapControl);
 
             stopWatch.Stop();
 
@@ -94,12 +101,8 @@ namespace BattleGame
             output.postMessage(map.ActualHeight.ToString());
             output.postMessage("Took " + ts.ToString() + " MS to start.");
 
-            MapControlFrame mapControl = new MapControlFrame(map, output);
-
-            Grid.SetRow(mapControl, 0);
-            Grid.SetColumn(mapControl, 0);
-
-            leftGrid.Children.Add(mapControl);
+            GovtScreen screen = new GovtScreen();
+            screen.Show();
         }
     }
 }

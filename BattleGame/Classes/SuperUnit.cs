@@ -7,11 +7,26 @@ using BattleGame.Classes;
 
 namespace BattleGame
 {
-    abstract class SuperUnit : Unit
+    public class SuperUnit : Unit
     {
         public List<Unit> SubUnits;
-        public int MaxEffectiveUnitCount;
         public double CountEffectivenessModifier;
+
+        public SuperUnit(string name)
+        {
+            Name = name;
+            SoftAttack = 0;
+            HardAttack = 0;
+            Piercing = 0;
+            Integrity = 0;
+            Organization = 0;
+            Speed = 0;
+            Armor = 0; 
+            Readiness = 0;
+            Entrenchment = 0; 
+            Defense = 0;
+            CombatWidth = 0;
+        }
 
         public void AddUnit(Unit unit)
         {
@@ -32,11 +47,9 @@ namespace BattleGame
 
         private void UpdateCombatEffectiveness()
         {
-            // Unit Count 
-            double mod = 1;
-            if (SubUnits.Count > MaxEffectiveUnitCount)
+            if (SubUnits.Count > CombatWidth)
             {
-                int timesOver = SubUnits.Count - MaxEffectiveUnitCount;
+                int timesOver = SubUnits.Count - CombatWidth;
                 CountEffectivenessModifier = 1 / timesOver;
             }
         }

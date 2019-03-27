@@ -9,30 +9,15 @@ namespace BattleGame.Classes
 
     class SupplyNeededList
     {
-        private int[] neededEquipmentAmount;
-        private int[] equipmentUseRate;
-        private Equipment[] neededEquipment;
+        public int[] NeededEquipmentAmount;
+        public int[] EquipmentUseRate;
+        public Equipment[] NeededEquipment;
 
         public SupplyNeededList(Equipment[] neededEquipment, int[] neededEquipmentAmount, int[] equipmentUseRate)
         {
-            this.neededEquipment = neededEquipment;
-            this.neededEquipmentAmount = neededEquipmentAmount;
-            this.equipmentUseRate = equipmentUseRate;
-        }
-
-        public Equipment[] getNeededEquipment()
-        {
-            return neededEquipment;
-        }
-
-        public int[] getNeededEquipmentAmount()
-        {
-            return neededEquipmentAmount;
-        }
-
-        public int[] getEquipmentUseRate()
-        {
-            return equipmentUseRate;
+            this.NeededEquipment = neededEquipment;
+            this.NeededEquipmentAmount = neededEquipmentAmount;
+            this.EquipmentUseRate = equipmentUseRate;
         }
     }
 }
