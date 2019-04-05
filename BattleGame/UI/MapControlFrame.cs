@@ -28,6 +28,7 @@ namespace BattleGame.UI
         private MapSpace[,] MapGrid;
         private OutputFrame Output;
         private readonly string TextureFolderLocation = System.IO.Path.GetFullPath(System.IO.Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, @"..\\..\\")) + "GameData\\Textures";
+        private GovtScreen GovernmentScreen;
 
         public MapControlFrame(MapFrame Map, OutputFrame Output)
         {
@@ -69,7 +70,8 @@ namespace BattleGame.UI
             ShowAgencies.Click += AgencyClick;
 
             ShowGov = new Button();
-            ShowGov += GovClick;
+            ShowGov.Click += GovClick;
+            GovernmentScreen = new GovtScreen();
 
 
             // Setting the positions of the UI elements.
@@ -83,17 +85,24 @@ namespace BattleGame.UI
             Grid.SetRow(ShowAgencies, 1);
             Grid.SetColumn(ShowAgencies, 1);
 
+            Grid.SetRow(ShowGov, 1);
+            Grid.SetColumn(ShowGov, 2);
+
             // Adding the UI elements to the grid.
 
             this.Children.Add(MapZoom);
             this.Children.Add(ShowInfrastructure);
             this.Children.Add(ShowAgencies);
+            this.Children.Add(ShowGov);
 
             Button button = (Button)VisualTreeHelper.GetChild(this, 1);
             SetButtonImage(1, TextureFolderLocation + "\\InfrastructureIcon.png");
 
             button = (Button)VisualTreeHelper.GetChild(this, 2);
             SetButtonImage(2, TextureFolderLocation + "\\EmptyClipboard.png");
+
+            button = (Button)VisualTreeHelper.GetChild(this, 3);
+            SetButtonImage(3, TextureFolderLocation + "\\govt.png");
         }
 
         private void ScrollEvent(object sender, RoutedEventArgs e)
@@ -111,22 +120,16 @@ namespace BattleGame.UI
             }
 
             Image img = new Image();
-            img.Loaded += ImageLoaded;
 
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.DecodePixelWidth = bitmap.PixelWidth;
-            bitmap.DecodePixelHeight = bitmap.PixelHeight;
             bitmap.UriSource = new Uri(imagePath);
             bitmap.EndInit();
+            bitmap.DecodePixelWidth = bitmap.PixelWidth;
+            bitmap.DecodePixelHeight = bitmap.PixelHeight;
 
             img.Source = bitmap;
             button.Content = img;
-        }
-
-        private void ImageLoaded(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void InfraClick(object sender, RoutedEventArgs e)
@@ -166,7 +169,14 @@ namespace BattleGame.UI
 
         private void GovClick(object sender, RoutedEventArgs e)
         {
-
+            if(GovernmentScreen.IsVisible == true)
+            {
+                GovernmentScreen.Hide();
+            }
+            else
+            {
+                GovernmentScreen.Show();
+            }
         }
     }
 }

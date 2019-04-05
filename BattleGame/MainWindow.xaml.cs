@@ -100,9 +100,6 @@ namespace BattleGame
             output.postMessage(map.ActualWidth.ToString());
             output.postMessage(map.ActualHeight.ToString());
             output.postMessage("Took " + ts.ToString() + " MS to start.");
-
-            GovtScreen screen = new GovtScreen();
-            screen.Show();
         }
     }
 }

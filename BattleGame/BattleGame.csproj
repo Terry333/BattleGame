@@ -60,6 +60,9 @@
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
     <Compile Include="Classes\Equipment\AKM.cs" />
     <Compile Include="Classes\Equipment\M14.cs" />
+    <Compile Include="Classes\GovernmentDemocracy.cs" />
+    <Compile Include="Classes\PoliticalParty.cs" />
+    <Compile Include="Classes\Politician.cs" />
     <Compile Include="Classes\SubUnit.cs" />
     <Compile Include="Classes\Man.cs" />
     <Compile Include="Classes\Men\Officer.cs" />
@@ -167,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GameData\Textures\mapIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\Textures\govt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

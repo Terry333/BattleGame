@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleGame.UI
+namespace BattleGame.Classes
 {
-    class ViewControl
+    public 
+    class GovernmentDemocracy
     {
-        public ViewControl(MapFrame map, MapControlFrame mapControl)
-        {
-
-        }
     }
 }
