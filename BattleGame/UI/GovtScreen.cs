@@ -22,6 +22,7 @@ namespace BattleGame.UI
 {
     class GovtScreen : Window
     {
+        GovernmentDemocracy Govt = new GovernmentDemocracy();
         public GovtScreen()
         {
             Width = 600;

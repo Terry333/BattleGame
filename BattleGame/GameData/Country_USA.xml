@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<list id="States" itemType="State">
+  <State id="NewYork">
+    <Name>
+      "New York"
+    </Name>
+    <Population>
+      17558072
+    </Population>
+    <Capital>
+      "Albany"
+    </Capital>
+    <Governor>
+      <Politician>
+        <Type>
+          1
+        </Type>
+        <Name>
+          "Hugh Carey"
+        </Name>
+      </Politician>
+    </Governor> 
+  </State>
+
+  <State id="California">
+    <Name>
+      "California"
+    </Name>
+    <Population>
+      23667902
+    </Population>
+    <Capital>
+      "Sacramento"
+    </Capital>
+    <Governor>
+      <Politician>
+        <Type>
+          1
+        </Type>
+        <Name>
+          "Jerry Brown"
+        </Name>
+      </Politician>
+    </Governor>
+  </State>
+         
+</list>
