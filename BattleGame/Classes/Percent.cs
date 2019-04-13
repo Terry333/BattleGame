@@ -10,16 +10,9 @@ namespace BattleGame.Classes
     class Percent
     {
         private Dictionary<string, double> Percents;
-        public Percent(string[] politicianTypes = null, string[] politicalParties = null)
+        public Percent(string[] strings = null)
         {
-            if(politicianTypes != null)
-            {
-                SetupDictionary(politicianTypes);
-            }
-            else if(politicalParties != null)
-            {
-                SetupDictionary(politicalParties);
-            }
+            SetupDictionary(strings);
         }
 
         private void SetupDictionary(string[] vs)
