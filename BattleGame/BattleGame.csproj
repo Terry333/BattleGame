@@ -57,13 +57,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Ammunition.cs" />
+    <Compile Include="Classes\BasicPercent.cs" />
     <Compile Include="Classes\Constructions\BaseConstruct.cs" />
     <Compile Include="Classes\Equipment\AKM.cs" />
     <Compile Include="Classes\Equipment\M14.cs" />
     <Compile Include="Classes\GovernmentDemocracy.cs" />
+    <Compile Include="Classes\NaturalResource.cs" />
     <Compile Include="Classes\Percent.cs" />
     <Compile Include="Classes\PoliticalParty.cs" />
     <Compile Include="Classes\Politician.cs" />
+    <Compile Include="Classes\ResourceController.cs" />
     <Compile Include="Classes\State.cs" />
     <Compile Include="Classes\SubUnit.cs" />
     <Compile Include="Classes\Man.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="Enums\ManStatus.cs" />
     <Compile Include="Enums\Player.cs" />
     <Compile Include="Enums\PoliticianType.cs" />
+    <Compile Include="Enums\Resources.cs" />
     <Compile Include="Enums\TerrainTypes.cs" />
     <Compile Include="Enums\UnitModifier.cs" />
     <Compile Include="Enums\UnitSize.cs" />

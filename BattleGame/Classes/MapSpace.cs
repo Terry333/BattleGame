@@ -26,6 +26,7 @@ namespace BattleGame.Classes
         public Player owner;
         public int InfrastructureLevel, FunctioningInfrastructure, TownLevel, MissingMen;
         public ForestLevel ForestLevel;
+        public ResourceController ResourceController;
 
         public MapSpace(int X, int Y)
         {
