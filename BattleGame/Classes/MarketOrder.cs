@@ -10,13 +10,32 @@ namespace BattleGame.Classes
     public class MarketOrder
     {
         public MarketItem NeededItem;
+        public double DesiredValue, Margin;
+        public int DesiredOffers;
+        public Dictionary<MarketUser, double> Offers;
+        public CurrencyTypes Currency;
+        public Market Market;
 
-        public MarketOrder(MarketItem item)
+        public MarketOrder(Market inside, MarketItem item, double desiredValue, double margin, CurrencyTypes desiredCurrency, int desiredOffers)
         {
-
+            Market = inside;
+            NeededItem = item;
+            DesiredValue = desiredValue;
+            Margin = margin;
+            Currency = desiredCurrency;
+            DesiredOffers = desiredOffers;
+            Offers = new Dictionary<MarketUser, double>();
         }
 
-        public bool OfferFulfillment(double value, CurrencyTypes currency)
+        public void OfferFulfillment(MarketUser user, double value, CurrencyTypes currency)
+        {
+            if(currency == Currency)
+            {
+                Offers.Add(user, value);
+            }
+        }
+
+        public void AcceptOffer()
         {
 
         }

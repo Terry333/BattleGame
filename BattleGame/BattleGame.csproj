@@ -69,6 +69,7 @@
     <Compile Include="Classes\MarketItem.cs" />
     <Compile Include="Classes\MarketOrder.cs" />
     <Compile Include="Classes\MarketUser.cs" />
+    <Compile Include="Classes\MoneyWallet.cs" />
     <Compile Include="Classes\NaturalResource.cs" />
     <Compile Include="Classes\Percent.cs" />
     <Compile Include="Classes\PoliticalParty.cs" />

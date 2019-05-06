@@ -11,8 +11,7 @@ namespace BattleGame.Classes
         public double Weight, Value, Price;
         public bool Valid;
         public MarketUser User;
-        public Inventory Inventory;
-        public Inventory AvailableGoods;
+        public string Name;
 
         public bool ChangeUser(MarketUser newUser)
         {

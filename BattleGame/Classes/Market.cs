@@ -17,5 +17,8 @@ namespace BattleGame.Classes
         }
 
         public void SubmitOrder()
+        {
+
+        }
     }
 }
