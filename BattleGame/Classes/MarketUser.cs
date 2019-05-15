@@ -28,16 +28,16 @@ namespace BattleGame.Classes
             Weight = 0;
         }
 
-        public void PurchaseItem(MarketUser user, MarketItem item, double value, CurrencyTypes type)
+        public void PurchaseItem(MarketUser user, MarketItem item, double value, Market market)
         {
             if(MarketGoods.Contains(item))
             {
-                if (user.Money.ChangeMoney(type, value * -1) == true)
+                if (user.Money.ChangeMoney(market.UsedCurrency, value * -1) == true)
                 {
                     MarketItem marketItem = MarketGoods.GetItem(item);
                     marketItem.User = user;
                     MarketGoods.Remove(marketItem);
-                    Money.ChangeMoney(type, value);
+                    Money.ChangeMoney(market.UsedCurrency, value);
                 }
                 
 

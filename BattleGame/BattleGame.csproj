@@ -58,8 +58,19 @@
     </ApplicationDefinition>
     <Compile Include="Classes\Ammunition.cs" />
     <Compile Include="Classes\BasicPercent.cs" />
-    <Compile Include="Classes\Constructions\BaseConstruct.cs" />
+    <Compile Include="Classes\Building.cs" />
+    <Compile Include="Classes\Buildings\CanningFactory.cs" />
+    <Compile Include="Classes\Buildings\ProducingBuilding.cs" />
+    <Compile Include="Classes\Buildings\RecipeLoader.cs" />
+    <Compile Include="Classes\Buildings\ToolSets\BakedBeansSet.cs" />
+    <Compile Include="Classes\Buildings\ToolSets\ToolSet.cs" />
     <Compile Include="Classes\Country.cs" />
+    <Compile Include="Classes\MarketItems\BakedBeans.cs" />
+    <Compile Include="Classes\MarketItems\RawRedBeans.cs" />
+    <Compile Include="Classes\MarketItems\RawBlackBeans.cs" />
+    <Compile Include="Classes\MarketItems\Salt.cs" />
+    <Compile Include="Classes\MarketItems\TinCan.cs" />
+    <Compile Include="Classes\CraftingRecipe.cs" />
     <Compile Include="Classes\Currency.cs" />
     <Compile Include="Classes\Equipment\AKM.cs" />
     <Compile Include="Classes\Equipment\M14.cs" />
@@ -67,6 +78,7 @@
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\Market.cs" />
     <Compile Include="Classes\MarketItem.cs" />
+    <Compile Include="Classes\MarketItems\CannedFood.cs" />
     <Compile Include="Classes\MarketOrder.cs" />
     <Compile Include="Classes\MarketUser.cs" />
     <Compile Include="Classes\MoneyWallet.cs" />
@@ -82,6 +94,7 @@
     <Compile Include="Classes\Men\Infantry.cs" />
     <Compile Include="Classes\SuperUnit.cs" />
     <Compile Include="Classes\World.cs" />
+    <Compile Include="Enums\BuildingTypes.cs" />
     <Compile Include="Enums\Caliber.cs" />
     <Compile Include="Enums\CurrencyTypes.cs" />
     <Compile Include="Enums\EquipmentUser.cs" />
@@ -106,6 +119,7 @@
       <DependentUpon>HexButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\MapFrame.cs" />
+    <Compile Include="UI\MarketUI.cs" />
     <Compile Include="UI\OutputFrame.cs" />
     <Compile Include="UI\InfoControl.xaml.cs">
       <DependentUpon>InfoControl.xaml</DependentUpon>
@@ -194,6 +208,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GameData\Country_USA.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GameData\Recipes.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

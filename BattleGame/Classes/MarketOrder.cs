@@ -15,8 +15,9 @@ namespace BattleGame.Classes
         public Dictionary<MarketUser, double> Offers;
         public CurrencyTypes Currency;
         public Market Market;
+        public MarketUser User;
 
-        public MarketOrder(Market inside, MarketItem item, double desiredValue, double margin, CurrencyTypes desiredCurrency, int desiredOffers)
+        public MarketOrder(Market inside, MarketUser user, MarketItem item, double desiredValue, double margin, CurrencyTypes desiredCurrency, int desiredOffers)
         {
             Market = inside;
             NeededItem = item;
@@ -25,19 +26,52 @@ namespace BattleGame.Classes
             Currency = desiredCurrency;
             DesiredOffers = desiredOffers;
             Offers = new Dictionary<MarketUser, double>();
+            User = user;
         }
 
         public void OfferFulfillment(MarketUser user, double value, CurrencyTypes currency)
         {
-            if(currency == Currency)
+            if(currency == Currency && value > 0 && IsInMargin(value))
             {
                 Offers.Add(user, value);
             }
         }
 
+        private bool IsInMargin(double value)
+        {
+            double top = DesiredValue + Margin;
+
+            if(value < top)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public void AcceptOffer()
         {
+            double bestOffer = -1;
+            MarketUser bestUser = null;
 
+            foreach (KeyValuePair<MarketUser, double> offer in Offers)
+            {
+                if(bestOffer >= 0 && offer.Value < bestOffer && offer.Key.MarketGoods.Contains(NeededItem) != false)
+                {
+                    bestUser = offer.Key;
+                    bestOffer = offer.Value;
+                }
+                else if(bestOffer == -1 && bestUser == null)
+                {
+                    bestUser = offer.Key;
+                    bestOffer = offer.Value;
+                }
+            }
+
+            if(bestOffer != -1 && bestUser != null)
+            {
+                bestUser.PurchaseItem(User, bestUser.MarketGoods.GetItem(NeededItem), bestOffer, Market);
+            }
         }
     }
 }

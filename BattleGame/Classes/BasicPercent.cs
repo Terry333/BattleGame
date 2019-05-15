@@ -42,6 +42,11 @@ namespace BattleGame.Classes
             return doubleValue * percent.value;
         }
 
+        public static double operator +(double doubleValue, BasicPercent percent)
+        {
+            return doubleValue + percent.value;
+        }
+
         public double Get()
         {
             return value;

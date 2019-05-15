@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<BattleGame.Classes.CraftingRecipe> <!-- Baked Beans , 0-->
+  <InputItems>
+    <BattleGame.Classes.MarketItems.Salt> 1 </BattleGame.Classes.MarketItems.Salt>
+    <BattleGame.Classes.MarketItems.RawBlackBeans> 50 </BattleGame.Classes.MarketItems.RawBlackBeans>
+    <BattleGame.Classes.MarketItems.TinCan> 100 </BattleGame.Classes.MarketItems.TinCan>
+  </InputItems>
+  <OutputItem>
+    <BattleGame.Classes.MarketItems.BakedBeans> 100 </BattleGame.Classes.MarketItems.BakedBeans>
+  </OutputItem>
+</BattleGame.Classes.CraftingRecipe>
