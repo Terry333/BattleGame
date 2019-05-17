@@ -18,5 +18,10 @@ namespace BattleGame.Classes.MarketItems
             Name = "Tin Can";
             Type = ItemTypes.Processed_Goods;
         }
+
+        public override MarketItem Clone()
+        {
+            return (TinCan)this.MemberwiseClone();
+        }
     }
 }

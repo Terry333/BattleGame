@@ -18,5 +18,10 @@ namespace BattleGame.Classes.MarketItems
             Name = "Baked Beans";
             Type = ItemTypes.Consumable;
         }
+
+        public override MarketItem Clone()
+        {
+            return (BakedBeans)this.MemberwiseClone();
+        }
     }
 }

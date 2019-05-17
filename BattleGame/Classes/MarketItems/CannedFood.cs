@@ -18,5 +18,11 @@ namespace BattleGame.Classes.MarketItems
             Name = "Canned Food";
             Type = ItemTypes.Consumable;
         }
+
+        public override MarketItem Clone()
+        {
+            return (CannedFood)this.MemberwiseClone();
+        }
+
     }
 }

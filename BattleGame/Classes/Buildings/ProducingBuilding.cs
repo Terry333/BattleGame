@@ -35,7 +35,36 @@ namespace BattleGame.Classes.Buildings
         {
             bool success = false;
 
-            foreach
+            if (ReadyForProduction)
+            {
+
+                foreach (KeyValuePair<object, int> itemSet in toolSet.Recipe.InputItems)
+                {
+                    if (Inventory.Contains((MarketItem)itemSet.Key) && Inventory.GetItem((MarketItem)itemSet.Key).StackAmount >= itemSet.Value)
+                    {
+                        Inventory.GetItem((MarketItem)itemSet.Key).StackAmount -= itemSet.Value;
+                        if (Inventory.GetItem((MarketItem)itemSet.Key).StackAmount == 0)
+                        {
+                            Inventory.GetItem((MarketItem)itemSet.Key).Valid = false;
+                            Inventory.Remove(Inventory.GetItem((MarketItem)itemSet.Key));
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                foreach(KeyValuePair<object, int> itemSet in toolSet.Recipe.OutputItems)
+                {
+                    MarketItem item = 
+                }
+
+                ReadyForProduction = false;
+                ProductionReadiness.Change(0);
+
+                success = true;
+            }
 
             return success;
         }

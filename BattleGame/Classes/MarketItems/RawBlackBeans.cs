@@ -18,5 +18,10 @@ namespace BattleGame.Classes.MarketItems
             Name = "Raw Black Beans";
             Type = ItemTypes.Raw_Goods;
         }
+
+        public override MarketItem Clone()
+        {
+            return (RawBlackBeans)this.MemberwiseClone();
+        }
     }
 }

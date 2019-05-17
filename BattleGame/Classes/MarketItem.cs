@@ -14,6 +14,8 @@ namespace BattleGame.Classes
         public MarketUser User;
         public string Name;
         public ItemTypes Type;
+        public bool Stack = false;
+        public int StackAmount = 1;
 
         public bool ChangeUser(MarketUser newUser)
         {
@@ -35,9 +37,9 @@ namespace BattleGame.Classes
             return false;
         }
 
-        public 
+        public abstract MarketItem Clone();
 
-        void Dispose()
+        public void Dispose()
         {
             Valid = false;
             GC.SuppressFinalize(this);

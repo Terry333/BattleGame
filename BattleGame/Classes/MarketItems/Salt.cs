@@ -18,5 +18,10 @@ namespace BattleGame.Classes.MarketItems
             Name = "Salt";
             Type = ItemTypes.Raw_Goods;
         }
+
+        public override MarketItem Clone()
+        {
+            return (Salt)this.MemberwiseClone();
+        }
     }
 }

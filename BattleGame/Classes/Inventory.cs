@@ -15,6 +15,43 @@ namespace BattleGame.Classes
             Items = new List<MarketItem>();
         }
 
+        private void StackItems()
+        {
+            List<string> countedTypes = new List<string>();
+            List<MarketItem> countedItems = new List<MarketItem>();
+            foreach(MarketItem item in Items)
+            {
+                if(item.Stack == false && !countedTypes.Contains(item.Name))
+                {
+                    countedItems.Add(item);
+                    countedTypes.Add(item.Name);
+                    item.Stack = true;
+                }
+                else if(countedTypes.Contains(item.Name))
+                {
+                    foreach(MarketItem item1 in countedItems)
+                    {
+                        if(item1.Name == item.Name)
+                        {
+                            item1.StackAmount += item.StackAmount;
+                            item.Valid = false;
+                            Items.Remove(item);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            countedItems = null;
+            countedTypes = null;
+        }
+
+        public void AddItem(MarketItem item)
+        {
+            Items.Add(item);
+            StackItems();
+        }
+
         public bool Contains(MarketItem item)
         {
             return Items.Contains(item);
